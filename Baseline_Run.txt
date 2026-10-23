@@ -1,0 +1,9 @@
+80/20 random split, seed 42
+Target: log(1 + quantity), standardized
+price, order, duration: log(1 + x), then standardized
+category: embedding (4 dims)
+sku: I’m dropping it. It’s a product ID, and when I gave it an embedding the model overfit after 1 epoch
+3 hidden layers: 64, 32, 16, relu, linear output
+Adam, learning rate 0.001
+Batch size 256
+Epochs: 40
