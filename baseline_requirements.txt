@@ -1,0 +1,70 @@
+BASELINE RUN REQUIREMENTS
+=========================
+
+Everyone builds the same baseline so our results can be compared.
+Change ONLY your own tuning parameter; keep everything else below exactly as written.
+If you need to deviate, say so in the group chat and note it on your slides.
+
+
+DATA
+----
+- File: pricing.csv (same as assignment 1). Do NOT commit it to this repo; it is confidential.
+- Inputs: price, order, duration, category
+- Target: quantity
+- sku is NOT used. It is a product ID, not a quantity. Embedding it overfit after
+  1 epoch (only ~5 rows per sku), and using it as a number assumes IDs have an order.
+
+
+TRAIN / TEST SPLIT
+------------------
+- 80% train / 20% test, random rows
+- Shuffle with numpy seed 42 before splitting:
+      rng = np.random.default_rng(42)
+      order = rng.permutation(len(df))
+      n_test = int(round(len(df) * 0.2))
+      test  = df.iloc[order[:n_test]]
+      train = df.iloc[order[n_test:]]
+- Result: 400,000 train rows / 100,000 test rows
+
+
+PREPROCESSING  (all means/stds from the TRAIN rows only)
+-------------
+- quantity (target):        log(1 + x), then standardise (subtract mean, divide by std)
+- price, order, duration:   log(1 + x), then standardise
+- category:                 integer code -> Embedding layer (input_dim = max code + 1 = 33, output_dim = 4)
+
+
+BASELINE ARCHITECTURE
+---------------------
+  category -> Embedding(33, 4) -> Flatten --+
+                                            +-> Concatenate (7 values)
+  numeric (price, order, duration) ---------+
+      -> Dense(64, relu) -> Dense(32, relu) -> Dense(16, relu) -> Dense(1, linear)
+
+- Weight initialisation: Keras default (glorot_uniform)
+- No dropout, no regularisation, no batch normalisation
+
+
+TRAINING
+--------
+- Loss: MSE
+- Optimizer: Adam, learning_rate = 0.001
+- Batch size: 256
+- Epochs: 40
+- Shuffle training rows every epoch (model.fit(..., shuffle=True))
+- Seed before building each model:  tf.keras.utils.set_random_seed(42)
+
+
+WHAT TO REPORT
+--------------
+- Train MSE and test MSE, measured on the full train and test sets AFTER training
+  (Keras's per-epoch "loss" is an average while weights are still changing)
+- Train and test loss for every epoch (for learning-curve plots)
+- Training time
+
+
+SANITY CHECK
+------------
+Everyone's baseline run (the settings above, unchanged) should give about the same
+test MSE. Post your baseline test MSE in the group chat; if they don't match, our
+specs have drifted and we fix that before comparing anything.
