@@ -1,0 +1,14 @@
+metric,value
+activation,sigmoid
+seed,42
+epochs_run,40
+diverged,False
+sec_per_epoch,4.25256981747807
+train_mse,0.3110675513744354
+train_r2,0.6889316698986373
+train_rmse_units,33.76262331433169
+train_mae_units,12.376434262768546
+test_mse,0.31275758147239685
+test_r2,0.6853170571276038
+test_rmse_units,33.60919846240311
+test_mae_units,12.298916274095548

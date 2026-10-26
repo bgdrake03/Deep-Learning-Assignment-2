@@ -1,0 +1,14 @@
+metric,value
+activation,relu
+seed,42
+epochs_run,20
+diverged,False
+sec_per_epoch,12.981947294983547
+train_mse,0.23876726627349854
+train_r2,0.7612321359962053
+train_rmse_units,28.313053504035572
+train_mae_units,10.129766373604369
+test_mse,0.4191257059574127
+test_r2,0.5782941217180705
+test_rmse_units,34.69343125614057
+test_mae_units,13.4403415060201

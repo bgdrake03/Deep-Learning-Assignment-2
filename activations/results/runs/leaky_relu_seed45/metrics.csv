@@ -1,0 +1,14 @@
+metric,value
+activation,leaky_relu
+seed,45
+epochs_run,40
+diverged,False
+sec_per_epoch,5.66480495253345
+train_mse,0.30723538994789124
+train_r2,0.6927638409186195
+train_rmse_units,33.65557871682254
+train_mae_units,12.34855659762445
+test_mse,0.3102514445781708
+test_r2,0.6878386220067136
+test_rmse_units,33.600796182725794
+test_mae_units,12.29137344361922

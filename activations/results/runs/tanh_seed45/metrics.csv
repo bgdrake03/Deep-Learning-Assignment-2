@@ -1,0 +1,14 @@
+metric,value
+activation,tanh
+seed,45
+epochs_run,40
+diverged,False
+sec_per_epoch,5.52846038499265
+train_mse,0.30914410948753357
+train_r2,0.6908551166006862
+train_rmse_units,34.550537440198184
+train_mae_units,12.45583239901389
+test_mse,0.31136202812194824
+test_r2,0.6867212016192805
+test_rmse_units,34.37785161577868
+test_mae_units,12.38987364574939

@@ -1,0 +1,10 @@
+| Activation | Train MSE | Test MSE (± sd) | Gap | Test R² | Test MAE (units) | Epochs to converge | Best epoch | Sec / epoch | Grad ratio h1/out (start → end) | Stuck units |
+|---|---|---|---|---|---|---|---|---|---|---|
+| sigmoid | 0.3104 | 0.3121 ± 0.0004 | 0.0018 | 0.686 | 12.30 | 29.8 | 40.0 | 4.7 | 0.011 → 0.470 | 3.1% |
+| tanh | 0.3087 | 0.3111 ± 0.0003 | 0.0024 | 0.687 | 12.29 | 12.4 | 40.0 | 5.5 | 2.197 → 0.648 | 0.0% |
+| relu | 0.3070 | 0.3101 ± 0.0004 | 0.0031 | 0.688 | 12.27 | 6.0 | 37.2 | 5.0 | 2.247 → 1.255 | 3.3% |
+| leaky_relu | 0.3070 | 0.3101 ± 0.0003 | 0.0031 | 0.688 | 12.25 | 5.2 | 39.4 | 5.4 | 2.260 → 1.544 | 0.0% |
+| prelu | 0.3070 | 0.3102 ± 0.0004 | 0.0032 | 0.688 | 12.26 | 6.4 | 37.2 | 5.7 | 2.247 → 1.158 | 0.4% |
+| elu | 0.3090 | 0.3113 ± 0.0004 | 0.0023 | 0.687 | 12.26 | 16.6 | 40.0 | 4.9 | 2.154 → 0.473 | 0.0% |
+
+Mean over seeds [42, 43, 44, 45, 46]. MSE is on standardised log(1+quantity), the training loss. "Epochs to converge" = first epoch with test MSE <= 0.3126 (101% of the best test MSE of any run).

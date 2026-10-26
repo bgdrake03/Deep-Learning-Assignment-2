@@ -1,0 +1,120 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1792714224.889351   52408 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1792714229.378761   52408 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+rows_total                       500000.000000
+rows_train                       400000.000000
+rows_test                        100000.000000
+n_sku                             74999.000000
+n_category                           32.000000
+test_rows_with_unseen_sku_pct         5.865000
+quantity_median                       7.000000
+quantity_mean                        22.822540
+quantity_p99                        228.000000
+quantity_max                       4165.000000
+price_max                           274.954536
+missing_values                        0.000000
+Model: "dnn_relu"
++--------------------------------------------------------------------------+
+| Layer (type)        | Output Shape      |    Param # | Connected to      |
+|---------------------+-------------------+------------+-------------------|
+| sku (InputLayer)    | (None, 1)         |          0 | -                 |
+|---------------------+-------------------+------------+-------------------|
+| category            | (None, 1)         |          0 | -                 |
+| (InputLayer)        |                   |            |                   |
+|---------------------+-------------------+------------+-------------------|
+| sku_embedding       | (None, 1, 8)      |    599,992 | sku[0][0]         |
+| (Embedding)         |                   |            |                   |
+|---------------------+-------------------+------------+-------------------|
+| category_embedding  | (None, 1, 4)      |        132 | category[0][0]    |
+| (Embedding)         |                   |            |                   |
+|---------------------+-------------------+------------+-------------------|
+| sku_flat (Flatten)  | (None, 8)         |          0 | sku_embedding[0]… |
+|---------------------+-------------------+------------+-------------------|
+| category_flat       | (None, 4)         |          0 | category_embeddi… |
+| (Flatten)           |                   |            |                   |
+|---------------------+-------------------+------------+-------------------|
+| numeric             | (None, 3)         |          0 | -                 |
+| (InputLayer)        |                   |            |                   |
+|---------------------+-------------------+------------+-------------------|
+| concat              | (None, 15)        |          0 | sku_flat[0][0],   |
+| (Concatenate)       |                   |            | category_flat[0]… |
+|                     |                   |            | numeric[0][0]     |
+|---------------------+-------------------+------------+-------------------|
+| hidden1 (Dense)     | (None, 64)        |      1,024 | concat[0][0]      |
+|---------------------+-------------------+------------+-------------------|
+| act1 (Activation)   | (None, 64)        |          0 | hidden1[0][0]     |
+|---------------------+-------------------+------------+-------------------|
+| hidden2 (Dense)     | (None, 32)        |      2,080 | act1[0][0]        |
+|---------------------+-------------------+------------+-------------------|
+| act2 (Activation)   | (None, 32)        |          0 | hidden2[0][0]     |
+|---------------------+-------------------+------------+-------------------|
+| hidden3 (Dense)     | (None, 16)        |        528 | act2[0][0]        |
+|---------------------+-------------------+------------+-------------------|
+| act3 (Activation)   | (None, 16)        |          0 | hidden3[0][0]     |
+|---------------------+-------------------+------------+-------------------|
+| output (Dense)      | (None, 1)         |         17 | act3[0][0]        |
++--------------------------------------------------------------------------+
+ Total params: 603,773 (2.30 MB)
+ Trainable params: 603,773 (2.30 MB)
+ Non-trainable params: 0 (0.00 B)
+
+=== relu  seed 42 ===
+Epoch 1/20
+1563/1563 - 12s - 7ms/step - loss: 0.3180 - val_loss: 0.2976
+Epoch 2/20
+1563/1563 - 10s - 6ms/step - loss: 0.2634 - val_loss: 0.3008
+Epoch 3/20
+1563/1563 - 10s - 6ms/step - loss: 0.2310 - val_loss: 0.3130
+Epoch 4/20
+1563/1563 - 10s - 7ms/step - loss: 0.2035 - val_loss: 0.3296
+Epoch 5/20
+1563/1563 - 10s - 7ms/step - loss: 0.1810 - val_loss: 0.3456
+Epoch 6/20
+1563/1563 - 10s - 6ms/step - loss: 0.1669 - val_loss: 0.3588
+Epoch 7/20
+1563/1563 - 10s - 6ms/step - loss: 0.1587 - val_loss: 0.3702
+Epoch 8/20
+1563/1563 - 10s - 6ms/step - loss: 0.1541 - val_loss: 0.3731
+Epoch 9/20
+1563/1563 - 10s - 7ms/step - loss: 0.1502 - val_loss: 0.4007
+Epoch 10/20
+1563/1563 - 10s - 7ms/step - loss: 0.1468 - val_loss: 0.3998
+Epoch 11/20
+1563/1563 - 11s - 7ms/step - loss: 0.1431 - val_loss: 0.4027
+Epoch 12/20
+1563/1563 - 10s - 7ms/step - loss: 0.1403 - val_loss: 0.3991
+Epoch 13/20
+1563/1563 - 13s - 8ms/step - loss: 0.1376 - val_loss: 0.3929
+Epoch 14/20
+1563/1563 - 16s - 10ms/step - loss: 0.1350 - val_loss: 0.4114
+Epoch 15/20
+1563/1563 - 18s - 11ms/step - loss: 0.1330 - val_loss: 0.4034
+Epoch 16/20
+1563/1563 - 18s - 12ms/step - loss: 0.1312 - val_loss: 0.4076
+Epoch 17/20
+1563/1563 - 18s - 11ms/step - loss: 0.1301 - val_loss: 0.4073
+Epoch 18/20
+1563/1563 - 18s - 11ms/step - loss: 0.1285 - val_loss: 0.4253
+Epoch 19/20
+1563/1563 - 18s - 12ms/step - loss: 0.1270 - val_loss: 0.4119
+Epoch 20/20
+1563/1563 - 20s - 12ms/step - loss: 0.1255 - val_loss: 0.4191
+
+Final metrics:
+  activation           relu
+  seed                 42
+  epochs_run           20
+  diverged             False
+  sec_per_epoch        12.981947294983547
+  train_mse            0.23876726627349854
+  train_r2             0.7612321359962053
+  train_rmse_units     28.313053504035572
+  train_mae_units      10.129766373604369
+  test_mse             0.4191257059574127
+  test_r2              0.5782941217180705
+  test_rmse_units      34.69343125614057
+  test_mae_units       13.4403415060201
+
+Loss curve saved to C:\Users\ansle\OneDrive\Desktop\BZAN554\Group-Assignment-2\results\plots\baseline_loss_curve.png

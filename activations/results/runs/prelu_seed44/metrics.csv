@@ -1,0 +1,17 @@
+metric,value
+activation,prelu
+seed,44
+epochs_run,40
+diverged,False
+sec_per_epoch,5.781808860012097
+train_mse,0.3073705732822418
+train_r2,0.6926286572458509
+train_rmse_units,32.92589348296092
+train_mae_units,12.30647523870748
+test_mse,0.3103735148906708
+test_r2,0.687715800219328
+test_rmse_units,33.0866124907768
+test_mae_units,12.270279197805557
+prelu_alpha_act1,-0.05638468265533447
+prelu_alpha_act2,-0.09125661849975586
+prelu_alpha_act3,-0.17756982147693634

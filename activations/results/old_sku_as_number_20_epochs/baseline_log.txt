@@ -1,0 +1,112 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1792714803.262471   12508 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1792714811.288604   12508 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+rows_total                       500000.000000
+rows_train                       400000.000000
+rows_test                        100000.000000
+n_sku                             74999.000000
+n_category                           32.000000
+test_rows_with_unseen_sku_pct         5.865000
+quantity_median                       7.000000
+quantity_mean                        22.822540
+quantity_p99                        228.000000
+quantity_max                       4165.000000
+price_max                           274.954536
+missing_values                        0.000000
+Model: "dnn_relu"
++--------------------------------------------------------------------------+
+| Layer (type)        | Output Shape      |    Param # | Connected to      |
+|---------------------+-------------------+------------+-------------------|
+| category            | (None, 1)         |          0 | -                 |
+| (InputLayer)        |                   |            |                   |
+|---------------------+-------------------+------------+-------------------|
+| category_embedding  | (None, 1, 4)      |        132 | category[0][0]    |
+| (Embedding)         |                   |            |                   |
+|---------------------+-------------------+------------+-------------------|
+| category_flat       | (None, 4)         |          0 | category_embeddi… |
+| (Flatten)           |                   |            |                   |
+|---------------------+-------------------+------------+-------------------|
+| numeric             | (None, 4)         |          0 | -                 |
+| (InputLayer)        |                   |            |                   |
+|---------------------+-------------------+------------+-------------------|
+| concat              | (None, 8)         |          0 | category_flat[0]… |
+| (Concatenate)       |                   |            | numeric[0][0]     |
+|---------------------+-------------------+------------+-------------------|
+| hidden1 (Dense)     | (None, 64)        |        576 | concat[0][0]      |
+|---------------------+-------------------+------------+-------------------|
+| act1 (Activation)   | (None, 64)        |          0 | hidden1[0][0]     |
+|---------------------+-------------------+------------+-------------------|
+| hidden2 (Dense)     | (None, 32)        |      2,080 | act1[0][0]        |
+|---------------------+-------------------+------------+-------------------|
+| act2 (Activation)   | (None, 32)        |          0 | hidden2[0][0]     |
+|---------------------+-------------------+------------+-------------------|
+| hidden3 (Dense)     | (None, 16)        |        528 | act2[0][0]        |
+|---------------------+-------------------+------------+-------------------|
+| act3 (Activation)   | (None, 16)        |          0 | hidden3[0][0]     |
+|---------------------+-------------------+------------+-------------------|
+| output (Dense)      | (None, 1)         |         17 | act3[0][0]        |
++--------------------------------------------------------------------------+
+ Total params: 3,333 (13.02 KB)
+ Trainable params: 3,333 (13.02 KB)
+ Non-trainable params: 0 (0.00 B)
+
+=== relu  seed 42 ===
+Epoch 1/20
+1563/1563 - 7s - 4ms/step - loss: 0.3310 - val_loss: 0.3175
+Epoch 2/20
+1563/1563 - 5s - 3ms/step - loss: 0.3137 - val_loss: 0.3149
+Epoch 3/20
+1563/1563 - 5s - 3ms/step - loss: 0.3119 - val_loss: 0.3136
+Epoch 4/20
+1563/1563 - 5s - 3ms/step - loss: 0.3107 - val_loss: 0.3130
+Epoch 5/20
+1563/1563 - 5s - 3ms/step - loss: 0.3098 - val_loss: 0.3121
+Epoch 6/20
+1563/1563 - 5s - 3ms/step - loss: 0.3091 - val_loss: 0.3116
+Epoch 7/20
+1563/1563 - 5s - 3ms/step - loss: 0.3085 - val_loss: 0.3113
+Epoch 8/20
+1563/1563 - 5s - 3ms/step - loss: 0.3080 - val_loss: 0.3107
+Epoch 9/20
+1563/1563 - 5s - 3ms/step - loss: 0.3076 - val_loss: 0.3102
+Epoch 10/20
+1563/1563 - 4s - 3ms/step - loss: 0.3072 - val_loss: 0.3097
+Epoch 11/20
+1563/1563 - 5s - 3ms/step - loss: 0.3069 - val_loss: 0.3094
+Epoch 12/20
+1563/1563 - 4s - 3ms/step - loss: 0.3066 - val_loss: 0.3095
+Epoch 13/20
+1563/1563 - 4s - 3ms/step - loss: 0.3063 - val_loss: 0.3093
+Epoch 14/20
+1563/1563 - 4s - 3ms/step - loss: 0.3060 - val_loss: 0.3092
+Epoch 15/20
+1563/1563 - 4s - 3ms/step - loss: 0.3058 - val_loss: 0.3089
+Epoch 16/20
+1563/1563 - 5s - 3ms/step - loss: 0.3056 - val_loss: 0.3088
+Epoch 17/20
+1563/1563 - 4s - 3ms/step - loss: 0.3054 - val_loss: 0.3086
+Epoch 18/20
+1563/1563 - 5s - 3ms/step - loss: 0.3052 - val_loss: 0.3083
+Epoch 19/20
+1563/1563 - 5s - 3ms/step - loss: 0.3050 - val_loss: 0.3083
+Epoch 20/20
+1563/1563 - 5s - 3ms/step - loss: 0.3048 - val_loss: 0.3083
+
+Final metrics:
+  activation           relu
+  seed                 42
+  epochs_run           20
+  diverged             False
+  sec_per_epoch        4.690687190019526
+  train_mse            0.3047718405723572
+  train_r2             0.6952273964614064
+  train_rmse_units     32.83682525475626
+  train_mae_units      12.245473965981184
+  test_mse             0.3082740306854248
+  test_r2              0.6898282090220519
+  test_rmse_units      33.168111056989325
+  test_mae_units       12.207841318840606
+
+Loss curve saved to C:\Users\ansle\OneDrive\Desktop\BZAN554\Group-Assignment-2\results\plots\baseline_loss_curve.png
